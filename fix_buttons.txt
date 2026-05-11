@@ -1,0 +1,63 @@
+              <div className="flex flex-wrap gap-1 mb-2">
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => {
+                    if (result || editedHtml) {
+                      navigator.clipboard.writeText(editedHtml || result);
+                      toast({ title: "Copiado!" });
+                    }
+                  }}
+                  disabled={!result && !editedHtml}
+                  data-testid="button-replicar-resultado"
+                >
+                  <Copy className="w-3 h-3 mr-1" />
+                  Replicar
+                </Button>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="bg-primary/5 border-primary/20 hover:bg-primary/10 text-primary font-bold"
+                  onClick={() => {
+                    setInputText(editedHtml || result);
+                    toast({
+                      title: "Replicado!",
+                      description: "Texto movido para o campo de entrada no topo.",
+                    });
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
+                  disabled={!result && !editedHtml}
+                  data-testid="button-replicar-entrada"
+                >
+                  <RefreshCw className="w-3 h-3 mr-1" />
+                  Replicar no InÃ­cio
+                </Button>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() =>
+                    refineResult(
+                      "Elabore uma minuta/peticao COMPLETA e FORMAL com base em tudo que temos. Documento profissional completo com todas as secoes."
+                    )
+                  }
+                  disabled={isRefining}
+                  data-testid="button-quick-minuta"
+                >
+                  <Gavel className="w-3 h-3 mr-1" />
+                  Construir Minuta
+                </Button>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() =>
+                    refineResult(
+                      "Expanda significativamente o documento. Adicione mais argumentacao juridica, mais fundamentacao legal, mais detalhes. O documento precisa ser mais longo e completo."
+                    )
+                  }
+                  disabled={isRefining}
+                  data-testid="button-quick-expandir"
+                >
+                  <Plus className="w-3 h-3 mr-1" />
+                  Expandir
+                </Button>
+              </div>
